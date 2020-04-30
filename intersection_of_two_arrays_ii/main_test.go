@@ -2,6 +2,7 @@ package main
 
 import (
 	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -10,11 +11,12 @@ func TestArrayManipulation(t *testing.T) {
 		result   []int
 		expected []int
 	}{
-		{twoSum([]int{2, 7, 11, 15}, 9), []int{0, 1}},
-		{twoSum([]int{2, 3, 0, 12, 3, 4, 9}, 21), []int{3, 6}},
-		{twoSum([]int{3, 2, 4}, 6), []int{1, 2}},
+		{intersect([]int{1, 2, 2, 1}, []int{2, 2}), []int{2, 2}},
+		{intersect([]int{4, 9, 5}, []int{9, 4, 9, 8, 4}), []int{4, 9}},
+		{intersect([]int{4, 9, 5, 9}, []int{9, 4, 9, 8, 4}), []int{4, 9, 9}},
 	}
 	for _, c := range cases {
+		sort.Ints(c.result)
 		if !reflect.DeepEqual(c.expected, c.result) {
 			t.Errorf("Error got: %v, want: %v.", c.result, c.expected)
 		}
